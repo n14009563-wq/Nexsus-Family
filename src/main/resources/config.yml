@@ -1,0 +1,92 @@
+# NexusFamily configuration.
+
+marriage:
+  # How long (seconds) a /marry propose or ring-propose stays open before it expires.
+  proposal-timeout-seconds: 60
+
+  ring:
+    # Wedding Ring item: purely a second way to propose (right-click a player while holding
+    # it). /marry propose/accept/deny/divorce always work with no item needed either way.
+    material: GOLD_NUGGET
+    display-name: "&6Wedding Ring"
+    lore:
+      - "&7Right-click a player to propose."
+      - "&7If they right-click you back while"
+      - "&7holding one too, you're married."
+    recipe:
+      enabled: true
+      # Shapeless -- drop these into a crafting grid in any arrangement.
+      ingredients:
+        - GOLD_INGOT
+        - DIAMOND
+
+kids:
+  # How often (real-world minutes) the plugin checks married couples for a new kid.
+  check-interval-minutes: 30
+  # Chance (0-100) on each check that an eligible couple has a kid.
+  chance-percent: 5
+  # Both spouses must be online and within this many blocks of each other to be eligible.
+  proximity-radius: 10
+  # A couple stops being offered new kids past this many.
+  max-kids-per-couple: 3
+  # How long (real-world minutes) a kid stays a baby before growing into an adult villager.
+  # Matches vanilla's own default baby->adult time (20 minutes).
+  growth-minutes: 20
+  # A random one of these is picked as a new kid's starting name (can be changed with
+  # /family rename).
+  default-names:
+    - Alex
+    - Sam
+    - Robin
+    - Jamie
+    - Quinn
+    - Casey
+  # Who can open a kid's Inventory/Rename/management menu -- always includes the kid's
+  # two parents and anyone with nexusfamily.admin, regardless of this setting.
+  management-open-to-everyone: false
+
+dialogue:
+  # Said (at random) when someone who is NOT a parent right-clicks to talk.
+  greetings:
+    - "Hi!"
+    - "Hello there."
+    - "Oh, hey!"
+  # Said (at random) when one of the kid's own parents right-clicks to talk.
+  parent-greetings:
+    - "Hi mom!"
+    - "Hi dad!"
+    - "I missed you!"
+  # Keyword-triggered replies for /family talk <message>. The first entry whose keywords
+  # ALL appear (case-insensitive) anywhere in the message wins; otherwise a fallback line
+  # is used. This is plain keyword matching, not a real AI -- no external calls, no cost.
+  responses:
+    - keywords: ["hello"]
+      replies: ["Hi!", "Hey there!"]
+    - keywords: ["how", "you"]
+      replies: ["I'm doing great!", "Pretty good, thanks for asking."]
+    - keywords: ["love", "you"]
+      replies: ["Love you too!", "Aww, that's sweet."]
+    - keywords: ["bye"]
+      replies: ["Bye!", "See you later!"]
+  fallback:
+    - "Hmm, not sure what to say to that."
+    - "..."
+    - "I don't really understand, sorry."
+
+messages:
+  proposal-sent: "&aProposal sent to {target}. They have {seconds}s to /marry accept."
+  proposal-received: "&a{proposer} wants to marry you! Run /marry accept or /marry deny."
+  proposal-expired: "&cYour proposal to {target} expired."
+  proposal-denied: "&cThat proposal was denied."
+  proposal-no-pending: "&cYou don't have a pending proposal to respond to."
+  already-married: "&cYou're already married. Run /marry divorce first."
+  target-already-married: "&c{target} is already married to someone else."
+  now-married: "&a{player1} and {player2} are now married!"
+  now-divorced: "&e{player1} and {player2} are no longer married."
+  not-married: "&cYou're not married."
+  marry-usage: "&cUsage: /marry <propose <player>|accept|deny|divorce|status|ring <player>>"
+  kid-born: "&d{player1} and {player2} just had a kid: {name}!"
+  no-target-kid: "&cLook at one of your kids (within a few blocks) and try again."
+  not-your-kid: "&cThat's not your kid, and you don't have permission to manage it."
+  line-added: "&aAdded a new line for {name} to say."
+  renamed: "&aRenamed {old} to {new}."
